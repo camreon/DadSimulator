@@ -7,6 +7,10 @@ TagManager:
   - Fire
   - Toy
   - Sweets
+  - Bed
+  - Couch
+  - Video Game
+  - TV
   layers:
   - Default
   - TransparentFX
