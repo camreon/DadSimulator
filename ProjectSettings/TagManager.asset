@@ -11,6 +11,7 @@ TagManager:
   - Couch
   - Video Game
   - TV
+  - Interactable
   layers:
   - Default
   - TransparentFX
