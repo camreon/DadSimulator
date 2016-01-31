@@ -13,7 +13,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public SharedGameObject target;
         [Tooltip("If target is null then use the target position")]
         public SharedVector3 targetPosition;
-        public SharedGameObjectList targets;
 
         public override void OnStart()
         {
@@ -39,12 +38,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         private Vector3 Target()
         {
             if (target.Value != null) {
-                return target.Value.transform.position;
-            }else if(targets.Value != null)
-            {
-                //Get random target
-                List<GameObject> targetList = targets.Value;
-                target.Value = targetList[Random.Range(0, targetList.Count)];
                 return target.Value.transform.position;
             }
             return targetPosition.Value;
