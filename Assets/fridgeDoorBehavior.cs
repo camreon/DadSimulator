@@ -32,7 +32,7 @@ public class fridgeDoorBehavior : Interactable {
         while(Time.time < startTime + rotateTime)
         {
             transform.RotateAround(hinge.transform.position, Vector3.up, -1f);
-            yield return 0;
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -42,7 +42,7 @@ public class fridgeDoorBehavior : Interactable {
         while (Time.time < startTime + rotateTime)
         {
             transform.RotateAround(hinge.transform.position, Vector3.up, 1f);
-            yield return 0;
+            yield return new WaitForFixedUpdate();
         }
     }
 

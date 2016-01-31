@@ -24,7 +24,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public override TaskStatus OnUpdate()
         {
             if (HasArrived()) {
-                SetDestination(Target());
+                return TaskStatus.Success;
             }
             return TaskStatus.Running;
         }
