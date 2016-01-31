@@ -8,8 +8,10 @@ public class faucetBehavior : Interactable {
     public EllipsoidParticleEmitter splash;
     public EllipsoidParticleEmitter waterfall;
     public GameObject puddle;
-    public float fillSpeed = 0.001f;
+    public float fillSpeed = 0.005f;
     public float maxWaterHeight = 3;
+	public float minWaterHeight = 0;
+
 
      public override void OnStart()
     {
@@ -41,5 +43,9 @@ public class faucetBehavior : Interactable {
                 puddle.SetActive(true);
             }
         }
+
+		// drain
+//		else if (planeWater != null && planeWater.transform.localPosition.y > minWaterHeight)
+//			planeWater.transform.Translate(0, -fillSpeed, 0, Space.Self);
     }
 }
