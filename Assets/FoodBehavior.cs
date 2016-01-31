@@ -6,4 +6,5 @@ public class FoodBehavior : MonoBehaviour {
     public bool isCooked = false;
     public bool isBurned = false;
 
+	public Material cooked = null;
 }

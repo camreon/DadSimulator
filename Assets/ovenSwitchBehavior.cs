@@ -50,10 +50,19 @@ public class ovenSwitchBehavior : Interactable
             yield return new WaitForFixedUpdate();
         }
        
-        ovenBody.GetComponent<ovenBodyBehavior>().ovenContents.GetComponent<FoodBehavior>().isBurned = true;
-        emitter.autoEmit = true;
+		var food = ovenBody.GetComponent<ovenBodyBehavior> ().ovenContents.GetComponent<FoodBehavior> ();
+		var materials = food.gameObject.GetComponent<MeshRenderer> ().materials;
 
-        Debug.Log("Food burned!");
+		for (var i=0; i < materials.Length; i++) {
+			if (materials [i].name.Contains("SMGP_MAT_Packed_meats_1024"))
+				materials [i] = food.cooked;
+		}
+
+		food.gameObject.GetComponent<MeshRenderer> ().materials = materials;
+		food.isBurned = true;
+		emitter.autoEmit = true;
+
+		Debug.Log("Food burned!");
     }
 
     public override void OnStart()
