@@ -37,7 +37,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
 
         protected override bool HasArrived()
         {
-            return !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance + 0.001f;
+            return !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance + 0.1f;
         }
 
         protected override Vector3 Velocity()
