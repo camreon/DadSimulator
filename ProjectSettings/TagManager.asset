@@ -12,6 +12,8 @@ TagManager:
   - Video Game
   - TV
   - Interactable
+  - Food
+  - Water
   layers:
   - Default
   - TransparentFX
