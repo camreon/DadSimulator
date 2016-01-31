@@ -49,8 +49,12 @@ public class PickupScript : MonoBehaviour
 		for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-            var selectedObj = hit.collider.gameObject.GetComponentInParent<Rigidbody> () ??
-							  hit.collider.gameObject.GetComponent<Rigidbody> ();
+            var selectedObj = hit.collider.gameObject.GetComponent<Rigidbody>();
+            if(selectedObj == null)
+            {
+                selectedObj =  hit.collider.gameObject.GetComponentInParent<Rigidbody>();
+            }
+							  
             if(hit.collider.gameObject.tag == "Interactable")
             {
                 hit.collider.gameObject.GetComponent<Interactable>().Interact();

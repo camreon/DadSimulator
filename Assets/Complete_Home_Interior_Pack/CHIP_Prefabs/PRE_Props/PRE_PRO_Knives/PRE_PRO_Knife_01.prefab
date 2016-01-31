@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 454760}
   - 33: {fileID: 3354762}
   - 23: {fileID: 2354762}
+  - 54: {fileID: 5405850}
   m_Layer: 0
   m_Name: PRE_PRO_Knife_01
   m_TagString: Untagged
@@ -92,6 +93,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154760}
   m_Mesh: {fileID: 4300000, guid: 0fb25f94943cddd46a1a8cb9bb5dd1e6, type: 3}
+--- !u!54 &5405850
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154760}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6554762
 BoxCollider:
   m_ObjectHideFlags: 1

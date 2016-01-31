@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 463344}
   - 33: {fileID: 3363346}
   - 23: {fileID: 2363346}
+  - 54: {fileID: 5466462}
   m_Layer: 0
   m_Name: DHP_PRE_Pink_cupcake_1024
   m_TagString: Untagged
@@ -91,6 +92,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163344}
   m_Mesh: {fileID: 4300000, guid: 6e891669f998e46b79e85613f2580cef, type: 3}
+--- !u!54 &5466462
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163344}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6563346
 BoxCollider:
   m_ObjectHideFlags: 1

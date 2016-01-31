@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 497608}
   - 33: {fileID: 3397610}
   - 23: {fileID: 2397610}
+  - 54: {fileID: 5497846}
   m_Layer: 0
   m_Name: PRE_PRO_Bowl_01
   m_TagString: Untagged
@@ -91,6 +92,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197608}
   m_Mesh: {fileID: 4300000, guid: 33347816e06d21e41af367cf8004742e, type: 3}
+--- !u!54 &5497846
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197608}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6597610
 BoxCollider:
   m_ObjectHideFlags: 1

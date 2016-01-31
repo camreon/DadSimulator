@@ -45,20 +45,22 @@ public class ovenSwitchBehavior : Interactable
         ovenBody.GetComponent<ovenBodyBehavior>().ovenContents.GetComponent<FoodBehavior>().isCooked = true;
         Debug.Log("Finished Cooking!");
         gameObject.GetComponent<AudioSource>().Play();
+        var food = ovenBody.GetComponent<ovenBodyBehavior>().ovenContents.GetComponent<FoodBehavior>();
+        var materials = food.gameObject.GetComponent<MeshRenderer>().materials;
+
+        food.gameObject.GetComponent<MeshRenderer>().materials = materials;
+        for (var i = 0; i < materials.Length; i++)
+        {
+            if (materials[i].name.Contains("SMGP_MAT_Packed_meats_1024"))
+                materials[i] = food.cooked;
+        }
         while (Time.time < startTime + cookTime + burnTime)
         {
             yield return new WaitForFixedUpdate();
         }
        
-		var food = ovenBody.GetComponent<ovenBodyBehavior> ().ovenContents.GetComponent<FoodBehavior> ();
-		var materials = food.gameObject.GetComponent<MeshRenderer> ().materials;
 
-		for (var i=0; i < materials.Length; i++) {
-			if (materials [i].name.Contains("SMGP_MAT_Packed_meats_1024"))
-				materials [i] = food.cooked;
-		}
 
-		food.gameObject.GetComponent<MeshRenderer> ().materials = materials;
 		food.isBurned = true;
 		emitter.autoEmit = true;
 

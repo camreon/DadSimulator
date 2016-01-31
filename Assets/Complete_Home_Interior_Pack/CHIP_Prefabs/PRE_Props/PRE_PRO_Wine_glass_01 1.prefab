@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 479378}
   - 33: {fileID: 3379376}
   - 23: {fileID: 2379376}
+  - 54: {fileID: 5487030}
   m_Layer: 0
   m_Name: PRE_PRO_Wine_glass_01 1
   m_TagString: Untagged
@@ -91,6 +92,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179378}
   m_Mesh: {fileID: 4300002, guid: 89f1d3e16fcff4249ba434b26e293298, type: 3}
+--- !u!54 &5487030
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179378}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 2
+  m_AngularDrag: 7
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6579376
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -109,7 +125,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Drag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179378}
