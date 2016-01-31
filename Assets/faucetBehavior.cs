@@ -10,6 +10,8 @@ public class faucetBehavior : Interactable {
     public GameObject puddle;
     public float fillSpeed = 0.001f;
     public float maxWaterHeight = 3;
+    public float fullWaterHeight = 2.5f;
+    public bool isFull = false;
 
      public override void OnStart()
     {
@@ -34,6 +36,10 @@ public class faucetBehavior : Interactable {
             if(planeWater.transform.localPosition.y < maxWaterHeight)
             {
                 planeWater.transform.Translate(0, fillSpeed, 0, Space.Self);
+            }
+            if(planeWater.transform.localPosition.y >= fullWaterHeight)
+            {
+                isFull = true;
             }
             if (planeWater.transform.localPosition.y >= maxWaterHeight)
             {

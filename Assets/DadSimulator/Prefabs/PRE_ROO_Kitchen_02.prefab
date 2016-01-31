@@ -20796,6 +20796,8 @@ MonoBehaviour:
   puddle: {fileID: 185008}
   fillSpeed: 0.001
   maxWaterHeight: -0.132
+  fullWaterHeight: 2.5
+  isFull: 0
 --- !u!114 &11457138
 MonoBehaviour:
   m_ObjectHideFlags: 1
