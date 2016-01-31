@@ -44,10 +44,12 @@ public class ovenSwitchBehavior : Interactable
         }
         ovenBody.GetComponent<ovenBodyBehavior>().ovenContents.GetComponent<FoodBehavior>().isCooked = true;
         Debug.Log("Finished Cooking!");
-        while(Time.time < startTime + cookTime + burnTime)
+        gameObject.GetComponent<AudioSource>().Play();
+        while (Time.time < startTime + cookTime + burnTime)
         {
             yield return new WaitForFixedUpdate();
         }
+       
         ovenBody.GetComponent<ovenBodyBehavior>().ovenContents.GetComponent<FoodBehavior>().isBurned = true;
         emitter.autoEmit = true;
 

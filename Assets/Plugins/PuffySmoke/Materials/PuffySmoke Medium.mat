@@ -117,7 +117,7 @@ Material:
       data:
         first:
           name: _LightIntensity
-        second: 0.76
+        second: 1.2
     m_Colors:
       data:
         first:
@@ -129,12 +129,12 @@ Material:
         second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       data:
         first:
-          name: _TintColor
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
           name: _Emission
         second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _TintColor
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _ShadowColor

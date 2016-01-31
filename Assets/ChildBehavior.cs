@@ -63,11 +63,11 @@ public class ChildBehavior : Interactable {
                 if (food.isCooked && !food.isBurned)
                 {
                     hasEaten = true;
-                    Debug.Log("Child ate!");
+                    GoalManager.instance.CompleteFood();
                 }
                 else
                 {
-                    Debug.Log("The food isn't cooked or is burned!");
+                   GoalManager.instance.Alert("The food isn't cooked or is burned!");
                 }
             }
             else if (goalItem.name == "BathTub Faucet")
@@ -76,7 +76,7 @@ public class ChildBehavior : Interactable {
                 if (faucet.isFull)
                 {
                     tookBath = true;
-                    Debug.Log("Bath!");
+                    GoalManager.instance.CompleteBath();
                 }
 
             }
