@@ -1,57 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
+using BehaviorDesigner.Runtime;
+
 
 public class ChildBehavior : Interactable {
 
-	private Transform cam;
-	private Rigidbody heldObj = null;
-	public float held_x = 0.5f;
-	public float held_y = 0.5f;
-	public float held_z = 1.0f;
     public bool hasEaten = false;
     public bool tookBath = false;
+	private Rigidbody heldBody = null;
+	private Animation anime = null;
+	private BehaviorTree bTree = null;
 
-    void Start () {
-        gameObject.GetComponentInChildren<Animation>().wrapMode = WrapMode.Loop;
+
+	public override void OnStart () {
+		bTree = gameObject.GetComponent<BehaviorTree> ();
+		anime = gameObject.GetComponentInChildren<Animation> ();
+		anime.wrapMode = WrapMode.Loop;
 	}
 
-	private void FixedUpdate()
-	{
-		// held object physics
-		if (heldObj != null)
-			heldObj.MovePosition (Camera.main.ViewportToWorldPoint (new Vector3 (held_x, held_y, held_z)));
+	public override void Interact() {
+		if (heldBody == null)
+			StartCoroutine( Pickup ());
 	}
 
-	public override void OnStart() {}
-	
-	public override void Interact()
+	IEnumerator Pickup()
 	{
-		if (heldObj == null) {
-			heldObj = this.gameObject.GetComponent<Rigidbody> ();
-			Pickup (heldObj);
-		} else {
-			Drop ();
+		heldBody = gameObject.GetComponent<Rigidbody> ();
+		bTree.enabled = false;
+		PlayAnimation ("flying");
+		Debug.Log ("child was picked up");
+
+		while (gameObject.transform.parent != null) {
+			yield return new WaitForFixedUpdate ();
 		}
+
+		PlayAnimation ("idle");
+		bTree.enabled = true;
+		heldBody = null;
+		Debug.Log ("child was dropped");
 	}
 
-	private void Pickup(Rigidbody obj) {
-		obj.useGravity = false;
-		obj.transform.parent = Camera.main.transform;
-		obj.freezeRotation = true;
-		obj.GetComponentInChildren<Animation> ().Play ("flying");
-
-		heldObj = obj;
+	private void PlayAnimation(string name)
+	{
+		anime.Stop ();
+		anime.Play (name);
 	}
 
-	private void Drop() {
-		heldObj.useGravity = true;
-		heldObj.transform.parent = null;
-		heldObj.freezeRotation = false;
-		heldObj.GetComponentInChildren<Animation> ().Play ("idle");
-		heldObj = null;
-	}
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Goal")
         {
@@ -67,7 +62,7 @@ public class ChildBehavior : Interactable {
                 }
                 else
                 {
-                   GoalManager.instance.Alert("The food isn't cooked or is burned!");
+                   GoalManager.instance.Alert("The porkchops are either under or over cooked!");
                 }
             }
             else if (goalItem.name == "BathTub Faucet")

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GoalManager : MonoBehaviour {
 
-
+	private string todoList = "TODO: \n 1. Bake porkchops \n 2. Cook pasta ";
     private string foodGoalComplete = "Timmy has eaten!  Agent Wife will be so happy!";
     private string bathGoalComplete = "Timmy had his bath! Agent Wife will be pleased!";
     private string goalHint1 = "Timmy never goes anywhere without his toys";
@@ -20,7 +20,10 @@ public class GoalManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        goalText.CrossFadeAlpha(0f, 5f, false);
+		currentText = todoList;
+		StartCoroutine (ShowTodoList());
+
+		goalText.CrossFadeAlpha(0f, 5f, false);
         StartCoroutine(RandomHint());
     }
 	
@@ -40,6 +43,16 @@ public class GoalManager : MonoBehaviour {
         currentText = bathGoalComplete;
         StartCoroutine(GoalAchieved());
     }
+
+	IEnumerator ShowTodoList()
+	{
+		goalText.text = currentText;
+		goalText.CrossFadeAlpha(1f, .5f, false);
+		yield return new WaitForSeconds(5f);
+		goalText.CrossFadeAlpha(0f, 3f, false);
+		yield return new WaitForSeconds(15f);
+	}
+
     IEnumerator GoalAchieved()
     {
         goalText.text = currentText;

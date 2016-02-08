@@ -3,44 +3,47 @@ using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
+using Dad;
 
 
 public class PickupScript : MonoBehaviour 
 {
-	private Transform cam;
-	private Rigidbody heldObj = null;
+	public Transform cam;
+	private Hand hand = new Hand ();
 	public float pickupRange = 2f;
-	public float held_x = 0.5f;
-	public float held_y = 0.5f;
-	public float held_z = 1.0f;
 
 
-	private void Start()
-	{
-		cam = Camera.main.transform;
+	private void Start() {
+		cam = Camera.main.transform;;
+
+		StartCoroutine (CarryPhysics());
+		StartCoroutine (ClickAction ());
 	}
 
-	private void FixedUpdate()
+	IEnumerator CarryPhysics() 
 	{
-		// held object physics
-		if (heldObj != null)
-			heldObj.MovePosition (Camera.main.ViewportToWorldPoint (new Vector3 (held_x, held_y, held_z)));
-	}
-
-	private void Update()
-	{
-		if (Input.GetMouseButtonDown (0)) {
-			if (heldObj != null) {
-				Drop ();
-			} else {
-				var foundObj = FindObj ();
-				if (foundObj)
-					Pickup (foundObj);
+		while (true) {
+			if (hand.item != null) {
+				hand.Carry ();
 			}
+			yield return null;
 		}
 	}
 
-	private Rigidbody FindObj()
+	IEnumerator ClickAction()
+	{
+		while (true) {
+			if (Input.GetMouseButtonDown (0)) {
+				if (hand.item != null)
+					hand.Drop ();
+				else
+					FindObj ();
+			} 
+			yield return null;
+		}
+	}
+		
+	private void FindObj()
 	{
 		RaycastHit[] hits;
         Ray ray = new Ray(cam.position, cam.forward);
@@ -48,39 +51,17 @@ public class PickupScript : MonoBehaviour
         
 		for (int i = 0; i < hits.Length; i++)
         {
-            RaycastHit hit = hits[i];
-            var selectedObj = hit.collider.gameObject.GetComponent<Rigidbody>();
-            if(selectedObj == null)
-            {
-                selectedObj =  hit.collider.gameObject.GetComponentInParent<Rigidbody>();
-            }
-							  
-            if(hit.collider.gameObject.tag == "Interactable")
-            {
-                hit.collider.gameObject.GetComponent<Interactable>().Interact();
-                return null;
-            }
+			// TODO: get nearest/best hit
 
-			if (selectedObj != null && !selectedObj.isKinematic)
-				return selectedObj;
-			else
-				Debug.Log (hit.collider.gameObject.name + " doesn't have a rigidbody or isKinematic.");
+			var hitObj = hits [i].collider.gameObject;
+
+			var success = hand.TryToPickup (hitObj);
+
+			if (hitObj.tag == "Interactable")
+				hitObj.GetComponent<Interactable> ().Interact ();
+
+			if (success)
+				break;
 		}
-
-		return null;
-	}
-
-	private void Pickup(Rigidbody obj) {
-        obj.useGravity = false;
-		obj.transform.parent = cam;
-		obj.freezeRotation = true;
-		heldObj = obj;
-	}
-
-	private void Drop() {
-        heldObj.useGravity = true;
-		heldObj.transform.parent = null;
-		heldObj.freezeRotation = false;
-		heldObj = null;
 	}
 }
